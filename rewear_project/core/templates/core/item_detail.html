@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="item-detail">
+            <div class="item-gallery">
+                <div class="main-image" style="background-image: url('{{ item.image.url }}');"></div>
+            </div>
+            <div class="item-details">
+                <h1>{{ item.title }}</h1>
+                <p>{{ item.description }}</p>
+                {% if item.tags.all %}
+                <div class="item-tags">
+                    {% for tag in item.tags.all %}
+                    <span class="tag">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="uploader-info">
+                    <h4>Listed by</h4>
+                    <p>{{ item.uploader.get_full_name|default:item.uploader.username }}</p>
+                </div>
+                <div style="margin: 1rem 0;">
+                    <p><strong>Category:</strong> {{ item.get_category_display }}</p>
+                    <p><strong>Size:</strong> {{ item.get_size_display }}</p>
+                    <p><strong>Condition:</strong> {{ item.get_condition_display }}</p>
+                    <p><strong>Status:</strong> <span style="text-transform: capitalize;">{{ item.status }}</span></p>
+                </div>
+                {% if user.is_authenticated and user != item.uploader %}
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Request Swap</button>
+                    <button class="btn btn-success">Redeem (50 Points)</button>
+                </div>
+                {% elif not user.is_authenticated %}
+                <p><a href="{% url 'login' %}">Login</a> to make a swap request.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

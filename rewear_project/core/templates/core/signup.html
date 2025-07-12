@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Join ReWear</h2>
+            <form method="post" action="{% url 'signup' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">
+                Already have an account? <a href="{% url 'login' %}">Login here</a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

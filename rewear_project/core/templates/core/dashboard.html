@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}My Dashboard{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <h2 class="section-title">My Dashboard</h2>
+        <div class="dashboard">
+            <div class="profile-card">
+                <div class="profile-avatar">{{ user.username.0|upper }}</div>
+                <h3 style="text-align: center;">{{ user.get_full_name|default:user.username }}</h3>
+                <p style="text-align: center; color: #666;">{{ user.email }}</p>
+                <div class="points-display">
+                    <h4>ReWear Points</h4>
+                    <div style="font-size: 2rem; font-weight: bold;">{{ user.points }}</div>
+                </div>
+            </div>
+            <div class="dashboard-content">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="my-items">My Items</button>
+                    <button class="tab-btn" data-tab="my-swaps">My Swaps</button>
+                    <button class="tab-btn" data-tab="completed">Completed</button>
+                </div>
+                <div id="my-items" class="tab-content active">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>My Listed Items</h3>
+                        <a href="{% url 'add_item' %}" class="btn btn-primary">Add New Item</a>
+                    </div>
+                    <div class="items-carousel">
+                        {% for item in user_items %}
+                            {% include 'core/partials/item_card.html' with item=item %}
+                        {% empty %}
+                            <p>You haven't listed any items yet. <a href="{% url 'add_item' %}">Add one now!</a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="my-swaps" class="tab-content">
+                    <h3>Ongoing Swaps</h3>
+                    <p>No ongoing swaps yet. <a href="{% url 'browse' %}">Browse items</a> to start swapping!</p>
+                </div>
+                <div id="completed" class="tab-content">
+                    <h3>Completed Swaps</h3>
+                    <p>No completed swaps yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Welcome to ReWear</h1>
+        <p>Join our community clothing exchange platform and give your unused clothes a new life. Swap, redeem, and discover sustainable fashion together.</p>
+        <div class="cta-buttons">
+            <a href="{% url 'browse' %}" class="btn btn-primary btn-lg">Browse Items</a>
+            <a href="{% url 'add_item' %}" class="btn btn-secondary btn-lg">List an Item</a>
+            <a href="{% url 'signup' %}" class="btn btn-success btn-lg">Start Swapping</a>
+        </div>
+    </div>
+</section>
+
+<section class="featured-items page-section">
+    <div class="container">
+        <h2 class="section-title">Featured Items</h2>
+        <div class="items-carousel">
+            {% for item in featured_items %}
+                {% include 'core/partials/item_card.html' with item=item %}
+            {% empty %}
+                <p style="text-align: center; grid-column: 1 / -1;">No featured items available right now. Check back soon!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

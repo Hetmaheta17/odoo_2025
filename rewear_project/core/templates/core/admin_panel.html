@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <h2 class="section-title">Admin Panel</h2>
+        <div class="admin-panel">
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-number">{{ stats.total_items }}</div>
+                    <div>Total Items</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ stats.active_users }}</div>
+                    <div>Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">0</div>
+                    <div>Completed Swaps</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ stats.pending_items_count }}</div>
+                    <div>Pending Items</div>
+                </div>
+            </div>
+            
+            <div class="pending-items">
+                <h3>Pending Item Approvals</h3>
+                {% for item in pending_items %}
+                <div class="pending-item">
+                    <div>
+                        <strong><a href="{% url 'item_detail' item.id %}">{{ item.title }}</a></strong><br>
+                        <small>Submitted by: {{ item.uploader.username }}</small>
+                    </div>
+                    <div class="pending-item-actions">
+                        <a href="{% url 'approve_item' item.id %}" class="btn btn-success">Approve</a>
+                        <a href="{% url 'reject_item' item.id %}" class="btn btn-danger">Reject</a>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No items are currently awaiting approval.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}```

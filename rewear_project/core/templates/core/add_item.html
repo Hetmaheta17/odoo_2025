@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block title %}List an Item{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="form-container" style="max-width: 600px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">List a New Item</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary" style="width: 100%;">List Item</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

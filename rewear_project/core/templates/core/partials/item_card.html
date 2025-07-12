@@ -1,0 +1,13 @@
+<div class="item-card" onclick="window.location.href='{% url 'item_detail' item.id %}'">
+    <div class="item-image" style="background-image: url('{{ item.image.url }}');">
+        {% if not item.image %}<span role="img" aria-label="shirt emoji">👕</span>{% endif %}
+    </div>
+    <div class="item-info">
+        <h3 class="item-title">{{ item.title }}</h3>
+        <p class="item-description">{{ item.description|truncatewords:10 }}</p>
+        <div class="item-meta">
+            <span>Size: {{ item.get_size_display }}</span>
+            <span class="tag">{{ item.get_condition_display }}</span>
+        </div>
+    </div>
+</div>

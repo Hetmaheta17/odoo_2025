@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Browse Items{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <h2 class="section-title">Browse All Items</h2>
+        <div class="items-carousel">
+            {% for item in browse_items %}
+                {% include 'core/partials/item_card.html' with item=item %}
+            {% empty %}
+                <p style="text-align: center; grid-column: 1 / -1;">No items have been listed yet. Be the first!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
