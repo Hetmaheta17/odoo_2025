@@ -8,7 +8,7 @@ class User(AbstractUser):
     points = models.IntegerField(default=50)
 
 class Tag(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=False)
 
     def __str__(self):
         return self.name
@@ -37,14 +37,16 @@ class Item(models.Model):
     condition = models.CharField(max_length=10, choices=CONDITION_CHOICES)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='available')
     
+    
     # Relationships
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='items')
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = models.CharField(max_length=50, blank=True)
     image = models.ImageField(upload_to='item_images/', default='item_images/default.png')
 
     # Admin and creation fields
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.title} by {self.uploader.username}'
+    

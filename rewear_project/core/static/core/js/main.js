@@ -29,18 +29,5 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-});
-```*You'll need to slightly modify the dashboard HTML to use `
-data-tab` attributes for this script to work.*
-
----
-
-// ### Final Steps: Run Your Application!
-
-// 1.  **Migrate your database:** `
-// python manage.py makemigrate` and `
-// python manage.py migrate`.
-// 2.  **Create an admin user:** `python manage.py createsuperuser`.
-// 3.  **Run the server:** `python manage.py runserver`.
-
-// Now, visit `http://127.0.0.1:8000/` in your browser. You should see the ReWear landing page, now fully powered by Django! You can sign up, log in, list items (which will require admin approval), and browse listings. The entire flow is now handled by a robust backend.
+})
+;
